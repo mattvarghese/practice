@@ -1,0 +1,24 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "This directory contains TypeScript implementations of LeetCode problems. The workspace uses **Jest** for rapid unit testing and integrates directly with the native VSCode Node.js debugging engine for real-time variable inspection.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "glob": "^13.0.6",
+    "inflight": "^1.0.6"
+  }
+}
