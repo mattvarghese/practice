@@ -22,6 +22,17 @@ leetcode/python/
 
 ---
 
+## Core Extensions Required
+
+To ensure full syntax intelligence, auto-formatting, virtual environment detection, and native test discovery, verify that these extensions are active in your VSCode layout:
+
+1. **Python** (`ms-python.python`)
+   * *Provides language support, code linting, and background virtual environment discovery.*
+2. **Python Debugger** (`ms-python.debugpy`)
+   * *Essential plumbing that coordinates breakpoint interception and variables visualization.*
+
+---
+
 ## Initial Environment Setup
 
 Run these commands from your terminal inside the `leetcode/python/` directory to provision your environment:
