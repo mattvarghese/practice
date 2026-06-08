@@ -7,3 +7,5 @@ This folder is my notes and practice as I work through Frances Buontempo - Intro
 
 Install VSCode, and extension packs "C/C++ Extension Pack: ms-vscode.cpptools-extension-pack" and "CMake Tools: ms-vscode.cmake-tools"
 
+# References
+* **C++ Reference wiki:** https://en.cppreference.com/

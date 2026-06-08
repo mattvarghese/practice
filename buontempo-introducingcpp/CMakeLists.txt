@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 project(BuontempoIntroducingCPP)
 
+# Place this at the top of your CMakeLists.txt (below the project name)
+# This injects these flags into EVERY target compiled in this directory tree
+# add_compile_options(-Wall -Wextra -Wpedantic)
+add_compile_options(-Wall)
+
 # Force debug symbols for seamless VSCode visual step-through
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug)
@@ -33,6 +38,12 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # ==============================================================================
+# Test Engine Initialization (Must happen before add_test calls!)
+# ==============================================================================
+include(CTest)
+enable_testing()
+
+# ==============================================================================
 # Executable Targets & Verification Suites
 # ==============================================================================
 
@@ -40,9 +51,29 @@ FetchContent_MakeAvailable(googletest)
 # (Swap out 'chapter1_intro.cpp' with whatever file name you create first)
 # add_executable(ch1_intro chapter1_intro.cpp)
 
+
 # Two Sum Automated Unit Test Suite
 # Compiles BOTH your implementation file and the test definitions into the test executable
 add_executable(00_two_sum_test 00_two_sum.cpp 00_two_sum_test.cpp)
 
 # Link the core GoogleTest library and its standard main entry point runner
 target_link_libraries(00_two_sum_test gtest_main)
+
+# Register the test binary target as an official CTest runnable entity
+add_test(NAME TwoSumTest COMMAND 00_two_sum_test)
+
+# --- Hello World Standalone App ---
+# This generates the isolated './00_hello_world' binary that our test reads
+add_executable(01_hello_world 01_hello_world.cpp)
+
+
+# --- Hello World Integration Test Suite ---
+# Compiles ONLY the test logic so we don't trigger duplicate main() definition conflicts
+add_executable(01_hello_world_test 01_hello_world_test.cpp)
+target_link_libraries(01_hello_world_test gtest_main)
+
+# Tells CMake that the test executable depends on the app binary being built first
+add_dependencies(01_hello_world_test 01_hello_world)
+
+# Register the test binary target as an official CTest runnable entity
+add_test(NAME HelloWorldTest COMMAND 01_hello_world_test)
