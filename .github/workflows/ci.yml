@@ -2,9 +2,13 @@ name: C++23 CI Pipeline
 
 on:
   push:
-    branches: [ main ]
+    # Remove the 'branches' filter to trigger on every branch push
+    branches: 
+      - '**'
   pull_request:
-    branches: [ main ]
+    # Remove the 'branches' filter to trigger on every pull request
+    branches: 
+      - '**'
 
 jobs:
   build-and-test:
