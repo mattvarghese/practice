@@ -3,12 +3,26 @@ project(BuontempoIntroducingCPP)
 
 # Place this at the top of your CMakeLists.txt (below the project name)
 # This injects these flags into EVERY target compiled in this directory tree
-# add_compile_options(-Wall -Wextra -Wpedantic)
-add_compile_options(-Wall)
+add_compile_options(
+    -Wall              # Turns on a large set of common warnings (uninitialized variables, etc.)
+    -Wextra            # Activates additional aggressive style and quality warnings
+    -Wpedantic         # Enforces strict ISO C++ compliance, rejecting non-portable GNU extensions
+    -Wconversion       # Flags dangerous implicit type casts (e.g., passing a double to an int)
+    -Wshadow           # Warns if a local variable name overrides/shadows a variable in an outer scope
+    -Wold-style-cast   # Rejects old C-style casts like (int)x; forces modern static_cast<int>(x)
+    -Wunused           # Aggressively flags unused variables, functions, and parameters
+    -Werror            # Treat all warnings as errors
+)
 
 # Force debug symbols for seamless VSCode visual step-through
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+# Enable native GCC code coverage instrumentation in Debug mode
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
 endif()
 
 # Strict C++23 standard configuration

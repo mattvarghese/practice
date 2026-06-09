@@ -1,3 +1,5 @@
+
+#include <tuple>
 #include <gtest/gtest.h>
 #include <cstdio>
 #include <memory>
@@ -52,8 +54,8 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(
         std::make_tuple("./01_hello_world", "Modern_Cpp23_Println"),
         std::make_tuple("./01_hello_world_cout", "Classic_Cpp20_Cout")),
-    [](const ::testing::TestParamInfo<HelloWorldTestSuite::ParamType> &info)
+    [](const ::testing::TestParamInfo<HelloWorldTestSuite::ParamType> &test_info)
     {
         // Extract the second element of the tuple (friendly_name) to label the VSCode sidebar entry
-        return std::get<1>(info.param);
+        return std::get<1>(test_info.param);
     });

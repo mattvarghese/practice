@@ -1,0 +1,55 @@
+name: C++23 CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install System Dependencies
+      # We install g++-14 explicitly because the default stock g++ version
+      # on ubuntu-latest doesn't fully support C++23 features like <print> yet.
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++-14 cmake gcovr
+
+    - name: Configure CMake
+      # 1. -S and -B explicitly handle your project subdirectory layout.
+      # 2. CMAKE_BUILD_TYPE=Debug tells g++ to instrument the binaries for coverage tracking.
+      # 3. CMAKE_CXX_COMPILER forces CMake to use the newly installed GCC 14 toolchain.
+      run: |
+        cmake -B buontempo-introducingcpp/build \
+              -S buontempo-introducingcpp \
+              -DCMAKE_CXX_COMPILER=g++-14 \
+              -DCMAKE_C_COMPILER=gcc-14 \
+              -DCMAKE_BUILD_TYPE=Debug
+
+    - name: Build Project
+      # Compile all targets using all available CPU cores on the runner
+      run: cmake --build buontempo-introducingcpp/build -j$(nproc)
+
+    - name: Run GoogleTest Suite
+      # Step directly into the configured build subdirectory to execute the test matrix
+      run: |
+        cd buontempo-introducingcpp/build
+        ctest --output-on-failure
+
+    - name: Verify 85% Code Coverage
+      # We pass --gcov-executable gcov-14 to match our compiler toolchain selection.
+      # Run from the absolute root of the repository, passing relative paths cleanly.
+      run: |
+        gcovr --root . \
+              --gcov-executable gcov-14 \
+              --filter buontempo-introducingcpp/ \
+              --exclude '.*buontempo-introducingcpp/build/.*' \
+              --fail-under-line 85 \
+              --print-summary
+

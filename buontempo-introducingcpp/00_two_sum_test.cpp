@@ -2,6 +2,7 @@
 #include <vector>
 #include <optional>
 #include <utility>
+#include <algorithm>
 
 // Forward declaration of your logic method from 00_two_sum.cpp
 std::optional<std::pair<int, int>> solve(const std::vector<int> &nums, int target);
@@ -57,10 +58,10 @@ INSTANTIATE_TEST_SUITE_P(
         TwoSumTestCase{"Example 2", {3, 2, 4}, 6},
         TwoSumTestCase{"Example 3", {3, 3}, 6},
         TwoSumTestCase{"Dual Pair Match", {1, 5, 5, 9}, 10}),
-    [](const ::testing::TestParamInfo<TwoSumTestCase> &info)
+    [](const ::testing::TestParamInfo<TwoSumTestCase> &test_info)
     {
         // Formats test runner output strings into human-readable labels
-        std::string name = info.param.label;
+        std::string name = test_info.param.label;
         std::replace(name.begin(), name.end(), ' ', '_');
         return name;
     });
