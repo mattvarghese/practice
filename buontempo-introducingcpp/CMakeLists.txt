@@ -63,8 +63,9 @@ target_link_libraries(00_two_sum_test gtest_main)
 add_test(NAME TwoSumTest COMMAND 00_two_sum_test)
 
 # --- Hello World Standalone App ---
-# This generates the isolated './00_hello_world' binary that our test reads
+# This generates the isolated './01_hello_world' and './01_hello_world_cout' binaries used below
 add_executable(01_hello_world 01_hello_world.cpp)
+add_executable(01_hello_world_cout 01_hello_world_cout.cpp)
 
 
 # --- Hello World Integration Test Suite ---
@@ -72,8 +73,9 @@ add_executable(01_hello_world 01_hello_world.cpp)
 add_executable(01_hello_world_test 01_hello_world_test.cpp)
 target_link_libraries(01_hello_world_test gtest_main)
 
-# Tells CMake that the test executable depends on the app binary being built first
+# Tells CMake that the test executable depends on the app binaries being built first
 add_dependencies(01_hello_world_test 01_hello_world)
+add_dependencies(01_hello_world_test 01_hello_world_cout)
 
 # Register the test binary target as an official CTest runnable entity
 add_test(NAME HelloWorldTest COMMAND 01_hello_world_test)

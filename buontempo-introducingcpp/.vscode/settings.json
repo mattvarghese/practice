@@ -2,5 +2,19 @@
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.configureOnOpen": true,
-    "cmake.ctest.debugLaunchTarget": "CMake Debug (from .vscode/launch.json)"
+    "cmake.ctest.debugLaunchTarget": "CMake Debug (from .vscode/launch.json)",
+    //
+    //
+    // Reduce VSCode noise
+    // 1. Silence the Git parent repository warning popup
+    "git.openRepositoryInParentFolders": "never",
+    // 2. Disable TypeScript/JavaScript project recommendation alerts
+    "js/ts.reportStyleChecksAsWarnings": false,
+    "js/ts.suggest.completeFunctionCalls": false,
+    // 3. Mute extension recommendation popups entirely
+    "extensions.ignoreRecommendations": true,
+    // 4. Clear out intrusive hover delays if they get in your way
+    "editor.hover.delay": 500,
+    // 5. Keep the lower status bar focused on code instead of background updates
+    "scm.providerCountBadge": "hidden"
 }
