@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <optional>
 #include <utility>
+#include <iostream>
 
 // This is leetcode problem #1 - Two Sum
 // Easy - https://leetcode.com/problems/two-sum/
@@ -27,4 +28,27 @@ std::optional<std::pair<int, int>> solve(const std::vector<int> &nums, int targe
     }
 
     return std::nullopt; // Explicitly represents no solution found
+}
+
+int main()
+{
+    // Define a test case
+    std::vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+
+    // Call the solver
+    auto result = solve(nums, target);
+
+    // Output the result
+    if (result)
+    {
+        auto [idx1, idx2] = *result; // Structured binding (C++17)
+        std::cout << "Indices found: " << idx1 << ", " << idx2 << "\n";
+    }
+    else
+    {
+        std::cout << "No solution found.\n";
+    }
+
+    return 0;
 }
