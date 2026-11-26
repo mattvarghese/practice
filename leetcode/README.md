@@ -43,6 +43,7 @@ Every language workspace here is configured for local execution, comprehensive s
 | **TypeScript** | ECMAScript Next | `jest` | `ts-node` + Node.js V8 Inspector |
 | **C#** | .NET 8.0+ | `xUnit` / `NUnit` | .NET Core Debugger (`vsdbg`) |
 | **Rust** | Edition 2021 | Built-in (`cargo test`) | `CodeLLDB` |
+| **Go** | Go 1.22+ | Built-in (`testing` / `go test`) | Delve (`dlv`) via Go Extension |
 
 ---
 
